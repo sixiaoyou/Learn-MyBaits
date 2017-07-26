@@ -10,6 +10,7 @@
 
 	<typeAliases>
 		<typeAlias alias="JiKeUser" type="com.jike.mybatis.jikebook.JiKeUser" />
+		<typeAlias alias="Author" type="com.jike.mybatis.jikebook.Author" />
 	</typeAliases>
 
 	<environments default="development">
@@ -29,6 +30,7 @@
 	<mappers>
 		<mapper resource="conf/jikeUser.xml" />
 		<mapper class="com.jike.mybatis.jikebook.InterfaceJiKeUserMap" />
+		<mapper resource="conf/author.xml" />
 	</mappers>
 
 </configuration>
