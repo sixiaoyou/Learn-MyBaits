@@ -3,8 +3,8 @@ package com.jike.mybatis.jikebook;
 public class Author {
 
     private Integer id;
-    private JiKeUser  jiKeUser;
-    private String realname;
+    private JiKeUser  jikeUser;
+    private String realName;
     private String  IDCard;
     public Integer getId() {
         return id;
@@ -12,17 +12,18 @@ public class Author {
     public void setId(Integer id) {
         this.id = id;
     }
-    public JiKeUser getJiKeUser() {
-        return jiKeUser;
+
+    public JiKeUser getJikeUser() {
+        return jikeUser;
     }
-    public void setJiKeUser(JiKeUser jiKeUser) {
-        this.jiKeUser = jiKeUser;
+    public void setJikeUser(JiKeUser jikeUser) {
+        this.jikeUser = jikeUser;
     }
-    public String getRealname() {
-        return realname;
+    public String getRealName() {
+        return realName;
     }
-    public void setRealname(String realname) {
-        this.realname = realname;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
     public String getIDCard() {
         return IDCard;

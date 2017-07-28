@@ -24,7 +24,7 @@ public class TestTran {
     }
     SqlSessionFactory sqlMapper = new SqlSessionFactoryBuilder().build(reader);
     session = sqlMapper.openSession(false);
-    try {
+    try { 
         JiKeUser jku = new JiKeUser();
         jku.setUserName("author001");
         jku.setPassword("123456");
@@ -32,14 +32,14 @@ public class TestTran {
         System.out.println("新加入的user id="+jku.getId());
         
         Author at = new Author();
-        at.setJiKeUser(jku);
-        at.setRealname("test");
-        session.insert("insertAuthor",at);
+        at.setJikeUser(jku);
+        at.setRealName("test");
+        session.insert("insertAuthor",at); 
         session.commit();
     } catch (Exception e) {
         session.rollback();
     } finally {
-        session.close();
+        session.close(); 
     }
 }
 }

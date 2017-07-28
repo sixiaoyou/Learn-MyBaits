@@ -7,40 +7,61 @@
 
 <mapper namespace="/">
 
-    <select id="findById" parameterType="int" resultType="com.jike.mybatis.jikebook.JiKeUser">
-        select * from jikeUser where id=#{id}
-    </select>
-    <insert id="insertUser" parameterType="JiKeUser" statementType="PREPARED"
-        keyProperty="id" useGeneratedKeys="true">
-        insert into JikeUser
-        (userName,password) values
-        (#{userName},#{password})
-    </insert>
-    <update id="updateUser" parameterType="JiKeUser">
-        UPDATE JiKeUser SET
-        userName=#{userName},
-        password=#{password}
-        WHERE id = #{id}
-    </update>
-    <select id="loginSelect" resultType="JiKeUser" parameterType="hashmap">
-        select * from JikeUser where userName=#{userName} and password=#{password}
-    </select>
-    
-    <select id="login2" resultType="JiKeUser" parameterType="JiKeUser">
-        select * from JikeUser where userName=#{userName} and password=#{password}
-    </select>
-    <select id="selectJiKeUserList" resultType="JiKeUser">
-        select * from JikeUser
-    </select>
-    <resultMap id="JiKeUserMap" type="JiKeUser"> 
-        <id property="id" column="id" /> 
-        <result property="userName" column="userName"/> 
-        <result property="password" column="password"/> 
-    </resultMap>
-    <select id="selectUsers" resultMap="JiKeUserMap"> 
-        select id, userName, password from JiKeUser   
-    </select>
-    
+	<select id="findById" parameterType="int"
+		resultType="com.jike.mybatis.jikebook.JiKeUser">
+		select * from jikeUser where id=#{id}
+	</select>
+	<insert id="insertUser" parameterType="JiKeUser" statementType="PREPARED"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into JikeUser
+		(userName,password) values
+		(#{userName},#{password})
+	</insert>
+	<update id="updateUser" parameterType="JiKeUser">
+		UPDATE JiKeUser SET
+		userName=#{userName},
+		password=#{password}
+		WHERE id = #{id}
+	</update>
+	<select id="loginSelect" resultType="JiKeUser" parameterType="hashmap">
+		select * from JikeUser where userName=#{userName} and
+		password=#{password}
+	</select>
 
- 
+	<select id="login2" resultType="JiKeUser" parameterType="JiKeUser">
+		select * from JikeUser where userName=#{userName} and password=#{password}
+	</select>
+	<select id="selectJiKeUserList" resultType="JiKeUser">
+		select * from JikeUser
+	</select>
+	<resultMap id="JiKeUserMap" type="JiKeUser">
+		<id property="id" column="id" />
+		<result property="userName" column="userName" />
+		<result property="password" column="password" />
+	</resultMap>
+
+	<select id="selectUsers" resultMap="JiKeUserMap">
+		select id, userName, password from JiKeUser
+	</select>
+
+
+
+	<resultMap id="visitMap" type="JiKeUser">
+		<id property="id" column="id" />
+		<result property="userName" column="userName" />
+		<collection property="visitList" javaType="ArrayList"
+			column="visitID" ofType="com.jike.mybatis.jikebook.Visit">
+			<result property="visitID" column="visitID" />
+			<result property="visitIP" column="visitIP" />
+			<result property="visitDate" column="visitDate" />
+		</collection>
+	</resultMap>
+
+	<select id="selectVisit" resultMap="visitMap">
+		select * from JiKeUser inner join visit on jikeuser.id=visit.userID
+	</select>
+
+
+
+
 </mapper>
