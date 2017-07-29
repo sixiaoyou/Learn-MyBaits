@@ -6,17 +6,18 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-<!-- 懒加载配置 -->
-    <settings>
-        <setting name="lazyLoadingEnabled" value="true"/>
-        <setting name="aggressiveLazyLoading" value="false"/>
-    </settings>
-    
+	<!-- 懒加载配置 -->
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="false" />
+	</settings>
+
 
 
 	<typeAliases>
 		<typeAlias alias="JiKeUser" type="com.jike.mybatis.jikebook.JiKeUser" />
 		<typeAlias alias="Author" type="com.jike.mybatis.jikebook.Author" />
+		<typeAlias alias="jikeReader" type="com.jike.mybatis.jikebook.JiKeReader" />
 	</typeAliases>
 
 	<environments default="development">
@@ -31,12 +32,13 @@
 			</dataSource>
 		</environment>
 	</environments>
-	
+
 
 	<mappers>
 		<mapper resource="conf/jikeUser.xml" />
 		<mapper class="com.jike.mybatis.jikebook.InterfaceJiKeUserMap" />
 		<mapper resource="conf/author.xml" />
+		<mapper resource="conf/jikeReader.xml" />
 	</mappers>
 
 </configuration>

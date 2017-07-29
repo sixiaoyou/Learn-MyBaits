@@ -60,6 +60,71 @@
 	<select id="selectVisit" resultMap="visitMap">
 		select * from JiKeUser inner join visit on jikeuser.id=visit.userID
 	</select>
+	<select id="selectJiKeUserChoose" resultType="JiKeUser" parameterType = "JiKeUser">
+		select * from jikeuser where  1=1
+		<choose>
+		          <when test="userName!=null">
+		                  and userName like #{userName}
+		          </when>
+		          <when test="id!=0">
+		                  and id =#{id}
+		          </when>
+		          <otherwise>
+		                  and password is not null
+		          </otherwise>
+		</choose>
+	</select>
+	<select id="selectJiKeUserWhere" resultType="JiKeUser" parameterType = "JiKeUser">
+		select * from jikeuser
+            <where>
+                <if test="userName!=null">
+                    and userName like #{userName}
+                </if>
+                <if test = "id!=null">
+                        and id = #{id}
+                </if>
+            </where>
+	</select>
+	<select id="selectJiKeUserForeach" resultType="JiKeUser" parameterType = "JiKeUser">
+		select * from jikeuser
+            <where>
+                id in 
+                <foreach item = "item"  index = "index" collection="list"
+                    open = "(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </where>
+	</select>
+	
+	<insert id = "insertJiKeUserForeach">
+	       insert into jikeUser (userName,password) values
+	       <foreach item = "item" index = "key" collection="list"
+	       open = "" separator = "," close = "">(#{item.userName},#{item.password})
+	       </foreach>
+	</insert>
+	
+<update id="updateJiKeUserSet" parameterType="JiKeUser">
+        update JiKeUser
+        <set>
+            <if test="userName != null">userName=#{userName},</if>
+            <if test="password != null">password=#{password},</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+<update id="updateUserTrim" parameterType="JiKeUser">
+        UPDATE JiKeUser
+        <trim prefix="SET" suffixOverrides="," suffix="WHERE id = #{id}">
+        <if test = "userName != null and userName != ''">
+                userName = #{userName},
+        </if>
+        
+        <if test = "password != null and password != ''">
+                password = #{password},
+        </if>
+        
+        </trim>
+    </update>
 
 
 
